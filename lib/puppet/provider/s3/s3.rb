@@ -11,15 +11,30 @@ desc "Run pupppet on a node"
         :secret_access_key  => @resource[:secret_access_key]
     )
 
-    source_ary  = @resource[:source].split('/')
-    bucket      = source_ary[0].pop
+    source_ary  = @resource[:source].chomp.split.split('/')
+    source_ary.shift # Remove prefixed white space
+    
+    bucket      = s3.buckets[source_ary.shift]
+    key         = "/" + File.join(source_ary)
+
+    obj         = bucket.objects[key]
+
+    File.open(@resource[:path], 'w') do |file|
+        obj.read do |chunk|
+            file.write(chunk)
+        end
+    end
+    
   end
 
   def destroy
-
+    
   end
 
   def exists?
+  
+      File.exists? @resource[:path]
+
   end
 
 end
