@@ -1,11 +1,7 @@
 Puppet::Type.newtype(:http) do
   desc "Run puppet on a node"
 
-  ensurable do
-
-    defaultvalues
-
-  end
+  ensurable 
 
   newparam(:path :namevar => true) do
     desc "Path to the file on the local filesystem"
