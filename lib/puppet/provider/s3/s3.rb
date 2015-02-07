@@ -8,11 +8,10 @@ Puppet::Type.type(:s3).provide(:s3) do
 
   def create
    
-    
-    s3 = AWS::S3::Client.new(
+   AWS.config( 
         :access_key_id      => @resource[:access_key_id], 
         :secret_access_key  => @resource[:secret_access_key],
-        :region             => @resource[:region] || 'us-east',
+        #:region             => @resource[:region] || 'us-east',
     )
 
     source_ary  = @resource[:source].chomp.split.split('/')
@@ -21,11 +20,14 @@ Puppet::Type.type(:s3).provide(:s3) do
     bucket      = source_ary.shift
     key         = "/" + File.join(source_ary)
 
-    resp = s3.get_object(
-         response_target:   @resource[:path],
-         bucket:            bucket,
-         key:               key,
-    )
+    s3 = AWS::S3.new
+    File.open(@resource[:path], 'wb') do |file|
+        resp = s3.get_object(
+            target: file,
+            bucket: bucket,
+            key:    key,
+        )
+    end
 
     #File.open(@resource[:path], 'w') do |file|
     #    obj.read do |chunk|
