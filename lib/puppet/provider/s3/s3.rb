@@ -8,21 +8,25 @@ desc "Run pupppet on a node"
     s3 = Aws::S3::Client.new(
         :access_key_id      => @resource[:access_key_id], 
         :secret_access_key  => @resource[:secret_access_key],
-        :region             => @resource[:region],
+        :region             => @resource[:region] || 'global',
     )
 
     source_ary  = @resource[:source].chomp.split.split('/')
     source_ary.shift # Remove prefixed white space
     
-    bucket      = s3.buckets[source_ary.shift]
+    bucket      = source_ary.shift
     key         = "/" + File.join(source_ary)
 
-    obj         = bucket.objects[key]
+    resp =  = s3.get_object(
+         response_target:   @resource[:path],
+         bucket:            bucket,
+         key:               key,
+    )
 
-    File.open(@resource[:path], 'w') do |file|
-        obj.read do |chunk|
-            file.write(chunk)
-        end
+    #File.open(@resource[:path], 'w') do |file|
+    #    obj.read do |chunk|
+    #        file.write(chunk)
+    #    end
     end
     
   end
