@@ -3,7 +3,7 @@ Puppet::Type.newtype(:http) do
 
   ensurable 
 
-  newparam(:path :namevar => true) do
+  newparam(:path, :namevar => true) do
     desc "Path to the file on the local filesystem"
   end
 
