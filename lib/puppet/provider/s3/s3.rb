@@ -17,7 +17,7 @@ desc "Run pupppet on a node"
     bucket      = source_ary.shift
     key         = "/" + File.join(source_ary)
 
-    resp =  = s3.get_object(
+    resp = s3.get_object(
          response_target:   @resource[:path],
          bucket:            bucket,
          key:               key,
