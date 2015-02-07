@@ -1,4 +1,3 @@
-require 'aws-sdk-v1'
 require 'aws-sdk'
 
 Puppet::Type.type(:s3).provide(:s3) do
