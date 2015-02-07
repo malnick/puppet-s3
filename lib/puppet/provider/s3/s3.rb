@@ -1,6 +1,7 @@
 require 'rubygems' #if Puppet.features.rubygems? 
-require 'aws-sdk-v1'
+#require 'aws-sdk-v1'
 require 'aws-sdk' #if Puppet.features.awssdk?
+require 'aws-sdk-resources'
 
 Puppet::Type.type(:s3).provide(:s3) do
   #confine :feature => :awssdk
