@@ -10,5 +10,5 @@ class s3 {
         provider => 'pe_gem',
     }
 
-    Package ['aws-sdk-core','aws-sdk-resources'] -> s3<| |>
+    Package ['aws-sdk-core','aws-sdk-resources'] -> s3 <| |>
 }
