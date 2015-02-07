@@ -1,5 +1,5 @@
-Puppet::Type.newtype(:http) do
-  desc "Run puppet on a node"
+Puppet::Type.newtype(:s3) do
+  desc "Get files from S3"
 
   ensurable 
 
