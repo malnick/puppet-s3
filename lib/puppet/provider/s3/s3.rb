@@ -27,7 +27,7 @@ desc "Run pupppet on a node"
     #    obj.read do |chunk|
     #        file.write(chunk)
     #    end
-    end
+    #end
     
   end
 
