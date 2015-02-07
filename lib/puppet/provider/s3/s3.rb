@@ -10,7 +10,7 @@ Puppet::Type.type(:s3).provide(:s3) do
 
   def create
    
-   AWS.config( 
+   Aws.config( 
         :access_key_id      => @resource[:access_key_id], 
         :secret_access_key  => @resource[:secret_access_key],
         #:region             => @resource[:region] || 'us-east',
@@ -22,7 +22,7 @@ Puppet::Type.type(:s3).provide(:s3) do
     bucket      = source_ary.shift
     key         = "/" + File.join(source_ary)
 
-    s3 = AWS::S3.new
+    s3 = Aws::S3.new
     File.open(@resource[:path], 'wb') do |file|
         resp = s3.get_object(
             target: file,
