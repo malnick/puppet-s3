@@ -7,7 +7,8 @@ desc "Run pupppet on a node"
     
     s3 = Aws::S3::Client.new(
         :access_key_id      => @resource[:access_key_id], 
-        :secret_access_key  => @resource[:secret_access_key]
+        :secret_access_key  => @resource[:secret_access_key],
+        :region             => @resource[:region],
     )
 
     source_ary  = @resource[:source].chomp.split.split('/')

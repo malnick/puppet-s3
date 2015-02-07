@@ -19,5 +19,9 @@ Puppet::Type.newtype(:s3) do
       desc "AWS secret access key"
   end
 
+  newparam(:region) do
+      desc "AWS region of S3"
+  end
+
 end
 
