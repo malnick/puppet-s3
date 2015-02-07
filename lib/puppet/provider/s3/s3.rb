@@ -7,11 +7,12 @@ Puppet::Type.type(:s3).provide(:s3) do
   desc "Run pupppet on a node"
 
   def create
+   
     
-    s3 = Aws::S3::Client.new(
+    s3 = AWS::S3::Client.new(
         :access_key_id      => @resource[:access_key_id], 
         :secret_access_key  => @resource[:secret_access_key],
-        :region             => @resource[:region] || 'global',
+        :region             => @resource[:region] || 'us-east',
     )
 
     source_ary  = @resource[:source].chomp.split.split('/')
