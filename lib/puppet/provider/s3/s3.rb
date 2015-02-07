@@ -1,4 +1,5 @@
-require 'aws-sdk'
+require 'rubygems' if Puppet.features.rubygems?
+require 'aws-sdk' if Puppet.features.awssdk?
 
 Puppet::Type.type(:s3).provide(:s3) do
 desc "Run pupppet on a node"
