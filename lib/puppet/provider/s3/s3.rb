@@ -17,14 +17,14 @@ Puppet::Type.type(:s3).provide(:s3) do
         :region             => resource[:region] || 'us-east-1',
     )
 
+    # Get the name of the bucket and path to the object:
     source_ary  = resource[:source].chomp.split('/')
     source_ary.shift # Remove prefixed white space
     
     bucket      = source_ary.shift
     key         = File.join(source_ary)
 
-    Puppet.info('Setting new S3 object and downloading...')
-
+    # Handle new S3 object
     resp = s3.get_object(
         response_target:    resource[:path],
         bucket:             bucket,
@@ -34,6 +34,8 @@ Puppet::Type.type(:s3).provide(:s3) do
   end
 
   def destroy
+
+      # rm rf some file on the filesystem that points to resource[:path]
     
   end
 
@@ -41,14 +43,17 @@ Puppet::Type.type(:s3).provide(:s3) do
 
   if File.exists?(resource[:path])  
 
+      # Setup a temp file to compare against
       temp_file = Tempfile.new(resource[:path])
 
+      # Create a new S3 client object
       s3 = Aws::S3::Client.new( 
             :access_key_id      => resource[:access_key_id], 
             :secret_access_key  => resource[:secret_access_key],
             :region             => resource[:region] || 'us-east-1',
         )
-
+        
+        # Do all the same stuff I did for create
         source_ary  = resource[:source].chomp.split('/')
         source_ary.shift # Remove prefixed white space
         
@@ -57,12 +62,14 @@ Puppet::Type.type(:s3).provide(:s3) do
 
         Puppet.info('Setting new S3 object and downloading...')
 
+        # Grab the object and point it at temp_file
         resp = s3.get_object(
             response_target:    temp_file, 
             bucket:             bucket,
             key:                key,
         )
         
+        # Compare the MD5 hashes, return true or false 
         temp_file_md5   = Digest::MD5.file(temp_file).hexdigest 
         actual_file_md5 = Digest::MD5.file(resource[:path]).hexdigest
 
