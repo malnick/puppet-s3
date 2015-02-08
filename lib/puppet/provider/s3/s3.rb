@@ -9,8 +9,8 @@ Puppet::Type.type(:s3).provide(:s3) do
   desc "Run pupppet on a node"
 
   def create
-   
-   Aws.config( 
+    Puppet.info('Connecting to AWS S3')   
+    Aws.config( 
         :access_key_id      => @resource[:access_key_id], 
         :secret_access_key  => @resource[:secret_access_key],
         #:region             => @resource[:region] || 'us-east',
@@ -21,6 +21,8 @@ Puppet::Type.type(:s3).provide(:s3) do
     
     bucket      = source_ary.shift
     key         = "/" + File.join(source_ary)
+
+    Puppet.info('Setting new S3 object and downloading...')
 
     s3 = Aws::S3.new
     File.open(@resource[:path], 'wb') do |file|
