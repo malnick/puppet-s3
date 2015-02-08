@@ -1,5 +1,7 @@
 require 'rubygems' #if Puppet.features.rubygems? 
 require 'aws-sdk' #if Puppet.features.awssdk?
+require 'digest'
+require 'tempfile'
 #require 'aws-sdk-resources'
 
 Puppet::Type.type(:s3).provide(:s3) do
@@ -36,9 +38,40 @@ Puppet::Type.type(:s3).provide(:s3) do
   end
 
   def exists?
-  
-      File.exists? resource[:path]
 
+  if File.exsts?(resource[:path])  
+
+      temp_file = Tempfile.new(resource[:path])
+
+      s3 = Aws::S3::Client.new( 
+            :access_key_id      => resource[:access_key_id], 
+            :secret_access_key  => resource[:secret_access_key],
+            :region             => resource[:region] || 'us-east-1',
+        )
+
+        source_ary  = resource[:source].chomp.split('/')
+        source_ary.shift # Remove prefixed white space
+        
+        bucket      = source_ary.shift
+        key         = File.join(source_ary)
+
+        Puppet.info('Setting new S3 object and downloading...')
+
+        resp = s3.get_object(
+            response_target:    temp_file, 
+            bucket:             bucket,
+            key:                key,
+        )
+        
+        temp_file_md5   = Digest::MD5.file(temp_file).hexdigest 
+        actual_file_md5 = Digest::MD5.file(resource[:path]]).hexdigest
+
+        if temp_file_md5  == actual_file_md5 
+            true
+        else
+            false
+        end
+  end
   end
 
 end
