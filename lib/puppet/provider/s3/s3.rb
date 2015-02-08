@@ -26,7 +26,7 @@ Puppet::Type.type(:s3).provide(:s3) do
 
     #File.open(resource[:path], 'wb') do |file|
         resp = s3.get_object(
-            target: resource[:path],
+            response_target: resource[:path],
             bucket: bucket,
             key:    key,
         )
