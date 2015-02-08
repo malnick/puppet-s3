@@ -13,7 +13,11 @@ Puppet::Type.newtype(:s3) do
   }
 
   ensurable do
-      defaultvalues
+
+      newvalue(:present) do
+          provider.create
+      end
+
   end
 
   newparam(:path, :namevar => true) do
