@@ -47,7 +47,7 @@ Puppet::Type.type(:s3).provide(:s3) do
 
   def exists?
   
-      File.exists? @resource[:path]
+      false #File.exists? @resource[:path]
 
   end
 
