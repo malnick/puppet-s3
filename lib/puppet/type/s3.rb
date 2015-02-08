@@ -11,10 +11,8 @@ Puppet::Type.newtype(:s3) do
             secret_access_key   => 'ITSASECRETTOO',
         }
   }
-
-  ensurable do
-    defaultvalues
-  end
+  
+  ensurable
 
   newparam(:path, :namevar => true) do
     desc "Path to the file on the local filesystem"
