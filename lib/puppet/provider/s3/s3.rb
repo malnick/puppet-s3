@@ -39,7 +39,7 @@ Puppet::Type.type(:s3).provide(:s3) do
 
   def exists?
 
-  if File.exsts?(resource[:path])  
+  if File.exists?(resource[:path])  
 
       temp_file = Tempfile.new(resource[:path])
 
