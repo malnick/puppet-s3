@@ -1,10 +1,18 @@
 Puppet::Type.newtype(:s3) do
   desc "Get files from S3"
 
-  ensurable 
+  ensurable do
+      defaultvalues
+  end
 
   newparam(:path, :namevar => true) do
     desc "Path to the file on the local filesystem"
+    validate do |v|
+        path = Pathname.new(v)
+        unless path.absolute?
+            raise ArgumentError, "Path not absolute: #{path}"
+        end
+    end
   end
 
   newparam(:source) do
