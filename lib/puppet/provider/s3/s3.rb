@@ -11,12 +11,12 @@ Puppet::Type.type(:s3).provide(:s3) do
   def create
     Puppet.info('Connecting to AWS S3')   
     Aws.config( 
-        :access_key_id      => @resource[:access_key_id], 
-        :secret_access_key  => @resource[:secret_access_key],
+        :access_key_id      => resource[:access_key_id], 
+        :secret_access_key  => resource[:secret_access_key],
         #:region             => @resource[:region] || 'us-east',
     )
 
-    source_ary  = @resource[:source].chomp.split.split('/')
+    source_ary  = resource[:source].chomp.split.split('/')
     source_ary.shift # Remove prefixed white space
     
     bucket      = source_ary.shift
@@ -25,7 +25,7 @@ Puppet::Type.type(:s3).provide(:s3) do
     Puppet.info('Setting new S3 object and downloading...')
 
     s3 = Aws::S3.new
-    File.open(@resource[:path], 'wb') do |file|
+    File.open(resource[:path], 'wb') do |file|
         resp = s3.get_object(
             target: file,
             bucket: bucket,
