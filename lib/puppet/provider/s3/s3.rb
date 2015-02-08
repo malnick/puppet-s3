@@ -20,7 +20,7 @@ Puppet::Type.type(:s3).provide(:s3) do
     source_ary.shift # Remove prefixed white space
     
     bucket      = source_ary.shift
-    key         = "/" + File.join(source_ary)
+    key         = File.join(source_ary)
 
     Puppet.info('Setting new S3 object and downloading...')
 
