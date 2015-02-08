@@ -16,7 +16,7 @@ Puppet::Type.type(:s3).provide(:s3) do
         :region             => resource[:region] || 'us-east-1',
     )
 
-    source_ary  = resource[:source].chomp.split.split('/')
+    source_ary  = resource[:source].chomp.split('/')
     source_ary.shift # Remove prefixed white space
     
     bucket      = source_ary.shift
