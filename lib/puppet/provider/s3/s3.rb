@@ -64,7 +64,7 @@ Puppet::Type.type(:s3).provide(:s3) do
         )
         
         temp_file_md5   = Digest::MD5.file(temp_file).hexdigest 
-        actual_file_md5 = Digest::MD5.file(resource[:path]]).hexdigest
+        actual_file_md5 = Digest::MD5.file(resource[:path]).hexdigest
 
         if temp_file_md5  == actual_file_md5 
             true
