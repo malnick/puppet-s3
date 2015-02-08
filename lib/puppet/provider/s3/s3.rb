@@ -1,12 +1,11 @@
 require 'rubygems' #if Puppet.features.rubygems? 
-#require 'aws-sdk-v1'
 require 'aws-sdk' #if Puppet.features.awssdk?
 #require 'aws-sdk-resources'
 
 Puppet::Type.type(:s3).provide(:s3) do
-  #confine :feature => :awssdk
+  confine :feature => :awssdk
 
-  desc "Run pupppet on a node"
+  desc "Securely get shit out of S3. Note this provider requires Version 2 of the aws-sdk. Ensure that v2 is installed."
 
   def create
     Puppet.info('Connecting to AWS S3')   
@@ -24,19 +23,11 @@ Puppet::Type.type(:s3).provide(:s3) do
 
     Puppet.info('Setting new S3 object and downloading...')
 
-    #File.open(resource[:path], 'wb') do |file|
-        resp = s3.get_object(
-            response_target: resource[:path],
-            bucket: bucket,
-            key:    key,
-        )
-    #end
-
-    #File.open(@resource[:path], 'w') do |file|
-    #    obj.read do |chunk|
-    #        file.write(chunk)
-    #    end
-    #end
+    resp = s3.get_object(
+        response_target:    resource[:path],
+        bucket:             bucket,
+        key:                key,
+    )
     
   end
 
