@@ -13,14 +13,14 @@
 #
 #   Author: jeff malnick, malnick@gmail.com
 
-require 'rubygems' #if Puppet.features.rubygems? 
-require 'aws-sdk' #if Puppet.features.awssdk?
+require 'rubygems' if Puppet.features.rubygems? 
+require 'aws-sdk' if Puppet.features.awssdk?
 require 'digest'
 require 'tempfile'
-#require 'aws-sdk-resources'
 
 Puppet::Type.type(:s3).provide(:s3) do
   confine :feature => :awssdk
+  confine :feature => :rubygems
 
   desc "Securely get shit out of S3. Note this provider requires Version 2 of the aws-sdk. Ensure that v2 is installed."
 
