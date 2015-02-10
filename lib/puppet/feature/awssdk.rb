@@ -1,8 +1,8 @@
 require 'puppet/util/feature'
 Puppet.features.add(:awssdk) do
-    if ! (defined?(::Aws)
-          false
-    else
-        true
+    begin
+        require 'aws-sdk'
+    rescue LoadError
+        false
     end
 end
