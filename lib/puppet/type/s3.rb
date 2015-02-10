@@ -1,4 +1,6 @@
 Puppet::Type.newtype(:s3) do
+  feture  :rubygems,    "Rubygems",     :methods => [:create, :exists?]
+  feature :awssdk,      "The AWS SDK",  :methods => [:create,:exists?]
   @@doc =  %q{Get files from S3
    
       Example:
