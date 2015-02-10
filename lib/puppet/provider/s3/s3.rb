@@ -22,6 +22,9 @@ Puppet::Type.type(:s3).provide(:s3) do
   confine :feature => :awssdk
   confine :feature => :rubygems
 
+  has_feature :awssdk
+  has_feature :rubygems
+
   desc "Securely get shit out of S3. Note this provider requires Version 2 of the aws-sdk. Ensure that v2 is installed."
 
   def create
