@@ -5,5 +5,5 @@ class s3 {
         provider => 'pe_gem',
     }
 
-    Package ['rubygems'] -> Package ['aws-sdk'] -> S3 <| |>
+    #    Package ['rubygems'] -> Package ['aws-sdk'] -> S3 <| |>
 }
