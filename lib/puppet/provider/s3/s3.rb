@@ -13,8 +13,8 @@
 #
 #   Author: jeff malnick, malnick@gmail.com
 
-require 'rubygems' if Puppet.features.rubygems? 
-require 'aws-sdk' if Puppet.features.awssdk?
+require 'rubygems' #if Puppet.features.rubygems? 
+require 'aws-sdk' #if Puppet.features.awssdk?
 require 'digest'
 require 'tempfile'
 
