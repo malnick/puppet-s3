@@ -70,7 +70,7 @@ Puppet::Type.type(:s3).provide(:s3) do
             
             bucket      = source_ary.shift
             key         = File.join(source_ary)
-            object_md5  = Aws::S3::Bucket.new(bucket).data.etag
+            object_md5  = Aws::S3::Bucket.new(bucket, :region => 'us-east-1').data.etag
 
             Puppet.info('Comparing MD5 values...')
 
