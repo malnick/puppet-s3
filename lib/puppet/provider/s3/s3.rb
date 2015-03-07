@@ -74,7 +74,7 @@ Puppet::Type.type(:s3).provide(:s3) do
             Puppet.info('Setting new S3 object and downloading...')
 
             # Grab the object and point it at temp_file
-            resp = s3.get_object(
+            resp = s3.etag(
                 bucket:  bucket,
                 key:     key,
             )
@@ -82,7 +82,7 @@ Puppet::Type.type(:s3).provide(:s3) do
             # Compare the MD5 hashes, return true or false 
             #file_md5   = Digest::MD5.file(file).hexdigest 
             file_md5    = Digest::MD5.file(resource[:path]).hexdigest
-            object_md5  = resp.etag
+            object_md5  = resp
             
             if file_md5 == object_md5 
                 true
