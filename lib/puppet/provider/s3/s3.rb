@@ -73,9 +73,8 @@ Puppet::Type.type(:s3).provide(:s3) do
 
             Puppet.info('Comparing MD5 values...')
 
-            object      = s3.bucket(bucket).object(key)
+            object      = s3.buckets(bucket).objects(key)
             object_md5  = object.data.etag 
-            #file_md5 = object.about['etag'].gsub('"', '')
             
             # Compare the MD5 hashes, return true or false 
             #file_md5   = Digest::MD5.file(file).hexdigest 
