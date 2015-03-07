@@ -70,11 +70,10 @@ Puppet::Type.type(:s3).provide(:s3) do
             
             bucket      = source_ary.shift
             key         = File.join(source_ary)
+            object_md5  = Aws::S3::Bucket.new(bucket).data.etag
 
             Puppet.info('Comparing MD5 values...')
 
-            object      = s3.buckets(bucket).objects(key)
-            object_md5  = object.data.etag 
             
             # Compare the MD5 hashes, return true or false 
             #file_md5   = Digest::MD5.file(file).hexdigest 
