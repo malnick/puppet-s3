@@ -56,35 +56,42 @@ Puppet::Type.type(:s3).provide(:s3) do
 
   def exists?
 
-      if File.exists?(resource[:path])  
-
-          # Create a new S3 client object
-          s3 = Aws::S3::Client.new( 
-                :access_key_id      => resource[:access_key_id], 
-                :secret_access_key  => resource[:secret_access_key],
-                :region             => resource[:region] || 'us-east-1',
-            )
-            # Do all the same stuff I did for create
-            source_ary  = resource[:source].chomp.split('/')
-            source_ary.shift # Remove prefixed white space
-            
-            bucket      = source_ary.shift
-            key         = File.join(source_ary)
-
-            Puppet.info('Comparing MD5 values...')
-            my_object   = s3.bucket(bucket).object(key)
-            object_md5  = my_object.data.etag
-
-            # Compare the MD5 hashes, return true or false 
-            #file_md5   = Digest::MD5.file(file).hexdigest 
-            file_md5    = Digest::MD5.file(resource[:path]).hexdigest
-            
-            if file_md5 == object_md5
-                true
-            else
-                false
-            end
-      end
+    if File.exists?(resource[:path])
+      true
+    else
+      false
+    end
   end
+
+# Old Exists method which tried to use the etag from aws
+   #   if File.exists?(resource[:path])  
+#
+#          # Create a new S3 client object
+#          s3 = Aws::S3::Client.new( 
+#                :access_key_id      => resource[:access_key_id], 
+#                :secret_access_key  => resource[:secret_access_key],
+#                :region             => resource[:region] || 'us-east-1',
+#            )
+#            # Do all the same stuff I did for create
+#            source_ary  = resource[:source].chomp.split('/')
+#            source_ary.shift # Remove prefixed white space
+#            
+#            bucket      = source_ary.shift
+#            key         = File.join(source_ary)
+#
+#            Puppet.info('Comparing MD5 values...')
+#            my_object   = s3.bucket(bucket).object(key)
+#            object_md5  = my_object.data.etag
+#
+#            # Compare the MD5 hashes, return true or false 
+#            #file_md5   = Digest::MD5.file(file).hexdigest 
+#            file_md5    = Digest::MD5.file(resource[:path]).hexdigest
+#            
+#            if file_md5 == object_md5
+#                true
+ #           else
+ #               false
+ #           end
+  #    end
 
 end
