@@ -12,7 +12,7 @@ describe 's3' do
           let(:params) {{ }}
           
           context "is_pe not defined" do
-#            let(:facts) {{ :is_pe => nil }}
+            it { should contain_class('s3') }
             it { is_expected.to compile.with_all_deps }
             it { is_expected.to contain_package('aws-sdk').with(
               :ensure   => 'present',
@@ -22,6 +22,7 @@ describe 's3' do
 
           context "is_pe true" do
             let(:facts) {{ :is_pe => true }}
+            it { should contain_class('s3') }
             it { is_expected.to compile.with_all_deps }
             it { is_expected.to contain_package('aws-sdk').with(
               :ensure   => 'present',

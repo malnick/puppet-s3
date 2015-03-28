@@ -36,7 +36,8 @@
 #
 class s3 {
 
-  $_provider = $::is_pe ? {
+  $_pe = pick(getvar(::is_pe), false)
+  $_provider = $_pe ? {
     true    => 'pe_gem',
     default => 'gem',
   }

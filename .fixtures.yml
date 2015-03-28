@@ -1,7 +1,10 @@
 fixtures:
   forge_modules:
-    stdlib:
+    pe_gem:
       repo: 'puppetlabs/pe_gem'
       ref: '0.1.0'
+    stdlib:
+      repo: 'puppetlabs/stdlib'
+      ref: '4.5.1'
   symlinks:
     s3: "#{source_dir}"
