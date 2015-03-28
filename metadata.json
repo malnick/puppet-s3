@@ -7,10 +7,20 @@
   "source": "https://github.com/malnick/puppet-s3",
   "project_page": "https://github.com/malnick/puppet-s3",
   "issues_url": "https://github.com/malnick/puppet-s3/issues",
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": ">3.2.0 <4.0.0"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": ">3.0.0 <4.0.0"
+    }
+  ],
   "dependencies": [
     {
       "name": "puppetlabs/pe_gem",
-      "version_requirement": ">= 0.1.0 <1.0"
+      "version_requirement": ">= 0.1.0 <1.0.0"
     },
     {
       "name": "puppetlabs/stdlib",
