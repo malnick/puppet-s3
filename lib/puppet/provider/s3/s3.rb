@@ -38,6 +38,7 @@ Puppet::Type.type(:s3).provide(:s3) do
     
     bucket      = source_ary.shift
     key         = File.join(source_ary)
+    
     Puppet.info("Pulling bucket: #{bucket}, key: #{key}")
     # Handle new S3 object
     resp = s3.get_object(
