@@ -32,7 +32,7 @@ new The :api_version constructor option is no longer accepted.
 Upgrading - Aws Module - Helper methods on Aws for client classes deprecated; For example, calling Aws.s3 will generate a
 deprecation warning. Use Aws::S3::Client.new instead. Helpers will be removed as of v2.0.0 final.
 
-More information can be found [here](https://github.com/aws/aws-sdk-core-ruby/blob/master/CHANGELOG.md)
+More information can be found [here](https://github.com/aws/aws-sdk-ruby/blob/master/CHANGELOG.md)
 
 ## Usage
 
