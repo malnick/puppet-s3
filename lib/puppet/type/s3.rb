@@ -1,6 +1,6 @@
 Puppet::Type.newtype(:s3) do
 
-  @@doc =  %q{Get files from S3
+  @doc =  %q{Get files from S3
    
       Example:
         
