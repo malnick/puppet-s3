@@ -10,7 +10,7 @@ describe 's3' do
 
         context "s3 class without any parameters" do
           let(:params) {{ }}
-          
+
           context "is_pe not defined" do
             it { should contain_class('s3') }
             it { is_expected.to compile.with_all_deps }

@@ -31,7 +31,7 @@ describe type do
 #  end
 
   it 'should require a name' do
-    expect { 
+    expect {
       type.new({})
     }.to raise_error(Puppet::Error, "Title or name must be provided")
   end

@@ -36,7 +36,7 @@ More information can be found [here](https://github.com/aws/aws-sdk-core-ruby/bl
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing the fancy stuff with your module here. 
+Put the classes, types, and resources for customizing, configuring, and doing the fancy stuff with your module here.
 
 ## Reference
 
