@@ -1,9 +1,9 @@
 Puppet::Type.newtype(:s3) do
 
-  @@doc =  %q{Get files from S3
-   
+  @doc =  %q{Get files from S3
+
       Example:
-        
+
         s3 {'/path/on/my/filesystem':
             ensure              => present,
             source              => '/bucket/subdir/s3_object',
@@ -12,7 +12,7 @@ Puppet::Type.newtype(:s3) do
             secret_access_key   => 'ITSASECRETTOO',
         }
   }
-  
+
   ensurable
 
   newparam(:path, :namevar => true) do
@@ -42,4 +42,3 @@ Puppet::Type.newtype(:s3) do
   end
 
 end
-
