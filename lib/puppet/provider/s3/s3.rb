@@ -60,7 +60,7 @@ Puppet::Type.type(:s3).provide(:s3) do
       if File.exists?(resource[:path])
 
           # Setup a temp file to compare against
-          temp_file = Tempfile.new(resource[:path])
+          temp_file = Tempfile.new(File.basename(resource[:path]), File.dirname(resource[:path]))
 
           # Create a new S3 client object
           s3 = Aws::S3::Client.new(
